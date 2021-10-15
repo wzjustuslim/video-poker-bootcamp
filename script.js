@@ -1,5 +1,5 @@
 let playerCredits = 100;
-const playerHand = [];
+let playerHand = [];
 
 const makeDeck = () => {
   const newDeck = [];
@@ -100,13 +100,6 @@ const discardAndReplace = () => {
   }
 };
 
-/// score the hand
-const calcHandScore = (hand) => {
-  const handScore = 1;
-  console.log(handScore);
-  return handScore;
-};
-
 const dealCards = () => {
   if (playerHand.length < 5) {
     drawFive();
@@ -119,6 +112,9 @@ const dealCards = () => {
 };
 
 /// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
+
+/// payout function to-do
+/// declaring win status to-do
 
 /// dont forget instructions with tooltps
 
@@ -133,19 +129,19 @@ const makePayTable = () => {
 
   for (let i = 1; i <= 5; i += 1) {
     const handPayouts = {
-      'Royal Flush': payouts[0] * i,
-      'Straight Flush': payouts[1] * i,
-      'Four Of A Kind': payouts[2] * i,
-      'Full House': payouts[3] * i,
-      Flush: payouts[4] * i,
-      Straight: payouts[5] * i,
-      'Three Of A Kind': payouts[6] * i,
-      'Two Pair': payouts[7] * i,
-      'Jacks Or Better': payouts[8] * i,
+      royalFlush: payouts[0] * i,
+      straightFlush: payouts[1] * i,
+      fourOfAKind: payouts[2] * i,
+      fullHouse: payouts[3] * i,
+      flush: payouts[4] * i,
+      straight: payouts[5] * i,
+      threeOfAKind: payouts[6] * i,
+      twoPair: payouts[7] * i,
+      jacksOrBetter: payouts[8] * i,
     };
     newTable.push(handPayouts);
   }
-  newTable[newTable.length - 1]['Royal Flush'] = 4000;
+  newTable[newTable.length - 1].royalFlush = 4000;
   return newTable;
 };
 
@@ -164,6 +160,127 @@ const selectPayouts = (playerBet) => {
 };
 
 const makeBet = (playerBet) => {
+  playerHand = [];
   deductBet(playerBet);
   selectPayouts(playerBet);
+};
+
+/// pass calcHandScore an array of object (a hand)
+const calcHandScore = (hand) => {
+  const handScore = 1;
+  console.log(handScore);
+  return handScore;
+};
+
+/// royal flush
+// 5 of the same suit**
+// A K Q J 10**
+
+/// straight flush
+// 5 sequential rank**
+// 5 of the same suit**
+
+/// flush
+// 5 of the same suit**
+// not all in sequence #implied
+
+/// straight
+// 5 sequential rank**
+// not all of the same suit #implied
+
+/// DISTILED CONDITIONS ///////////////////////// WORK HERE!!! return a key or boolean
+// test for A K Q J 10 sequence (royal)
+// test for 5 of the same suit
+// test for 5 in sequence
+
+/// Meta test?
+// test for the length of rank tally 2, 3, 4
+
+const makeRankTally = (hand) => {
+  const rankTally = {};
+  for (let i = 0; i < hand.length; i += 1) {
+    const cardRank = hand[i].rank;
+
+    if (cardRank in rankTally) {
+      rankTally[cardRank] += 1;
+    }
+    else {
+      rankTally[cardRank] = 1;
+    }
+  }
+  return rankTally;
+};
+
+const makeSuitTally = (hand) => {
+  const suitTally = {};
+  for (let i = 0; i < hand.length; i += 1) {
+    const cardSuit = hand[i].suit;
+
+    if (cardSuit in suitTally) {
+      suitTally[cardSuit] += 1;
+    }
+    else {
+      suitTally[cardSuit] = 1;
+    }
+  }
+  return suitTally;
+};
+
+const deriveMaxValue = (tallyObject) => {
+  const valuesArray = Object.values(tallyObject);
+  const maxValue = Math.max(...valuesArray);
+  return maxValue;
+};
+
+const deriveKeysLength = (tallyObject) => {
+  const keysArray = Object.keys(tallyObject);
+  const keysLength = keysArray.length;
+  return keysLength;
+};
+
+const makeTestCards = (cardSuit, cardRank) => {
+  const card = {
+    suit: cardSuit,
+    rank: cardRank,
+  };
+  playerHand.push(card);
+};
+
+const checkForSuitAgnosticHands = (hand) => {
+  const rankTally = makeRankTally(hand);
+  console.log(rankTally);
+
+  const rankMaxVal = deriveMaxValue(rankTally);
+  const rankKeysLen = deriveKeysLength(rankTally);
+
+  console.log(rankMaxVal);
+  console.log(rankKeysLen);
+
+  if (rankMaxVal === 4 && rankKeysLen === 2) {
+    /// four-of-a-kind where 4 of first rank and 1 of second rank suit-agnostic
+    console.log('fourOfAKind');
+  } else if (rankMaxVal === 3 && rankKeysLen === 2) {
+    /// full-house where 3 of first rank and 2 of second rank suit-agnostic
+    console.log('fullHouse');
+  } else if (rankMaxVal === 3 && rankKeysLen === 3) {
+    /// three-of-a-kind where 3 of first rank and 1 of second rank and 1 of third rank suit-agnostic
+    console.log('threeOfAKind');
+  } else if (rankMaxVal === 2 && rankKeysLen === 3) {
+    /// two-pair where 2 of first rank and 2 of second rank and 1 of third rank suit-agnostic
+    console.log('twoPair');
+  } else if (rankMaxVal === 2 && rankKeysLen === 4) {
+    /// pair where 2 of first rank and 1 of second rank and 1 of third rank and 1 of fourth rank
+    if (rankTally[11] === 2 || rankTally[12] === 2 || rankTally[13] === 2 || rankTally[1] === 2) {
+      // jacks-or-better-pair where 2 of first rank is jack, queen, king, ace suit-agnostic
+      console.log('jacksOrBetter');
+      console.log(rankTally);
+    } else {
+      // any worse than jacks pair
+      console.log('something else...');
+      console.log(rankTally);
+    }
+  } else {
+    console.log('something else...');
+    console.log(rankTally);
+  }
 };
