@@ -105,22 +105,11 @@ const dealCards = () => {
     drawFive();
   } else if (playerHand.length === 5) {
     discardAndReplace();
-    calcHandScore(playerHand);
+    // calcHandScore(playerHand);
     /// empty player hand at round end
     // playerHand = [];
   }
 };
-
-/// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
-
-/// payout function to-do
-/// declaring win status to-do
-
-/// dont forget instructions with tooltps
-
-/// wireframe for mobile
-
-/// follow blue screen video poker model layout
 
 /// make a payout table
 const makePayTable = () => {
@@ -172,30 +161,6 @@ const calcHandScore = (hand) => {
   return handScore;
 };
 
-/// royal flush
-// 5 of the same suit**
-// A K Q J 10**
-
-/// straight flush
-// 5 sequential rank**
-// 5 of the same suit**
-
-/// flush
-// 5 of the same suit**
-// not all in sequence #implied
-
-/// straight
-// 5 sequential rank**
-// not all of the same suit #implied
-
-/// DISTILED CONDITIONS ///////////////////////// WORK HERE!!! return a key or boolean
-// test for A K Q J 10 sequence (royal)
-// test for 5 of the same suit
-// test for 5 in sequence
-
-/// Meta test?
-// test for the length of rank tally 2, 3, 4
-
 const makeRankTally = (hand) => {
   const rankTally = {};
   for (let i = 0; i < hand.length; i += 1) {
@@ -238,23 +203,15 @@ const deriveKeysLength = (tallyObject) => {
   return keysLength;
 };
 
-const makeTestCards = (cardSuit, cardRank) => {
-  const card = {
-    suit: cardSuit,
-    rank: cardRank,
-  };
-  playerHand.push(card);
-};
-
 const checkForSuitAgnosticHands = (hand) => {
   const rankTally = makeRankTally(hand);
-  console.log(rankTally);
+  // console.log(rankTally);
 
   const rankMaxVal = deriveMaxValue(rankTally);
   const rankKeysLen = deriveKeysLength(rankTally);
 
-  console.log(rankMaxVal);
-  console.log(rankKeysLen);
+  // console.log(rankMaxVal);
+  // console.log(rankKeysLen);
 
   if (rankMaxVal === 4 && rankKeysLen === 2) {
     /// four-of-a-kind where 4 of first rank and 1 of second rank suit-agnostic
@@ -269,18 +226,95 @@ const checkForSuitAgnosticHands = (hand) => {
     /// two-pair where 2 of first rank and 2 of second rank and 1 of third rank suit-agnostic
     console.log('twoPair');
   } else if (rankMaxVal === 2 && rankKeysLen === 4) {
+    console.log('a pair...');
     /// pair where 2 of first rank and 1 of second rank and 1 of third rank and 1 of fourth rank
     if (rankTally[11] === 2 || rankTally[12] === 2 || rankTally[13] === 2 || rankTally[1] === 2) {
       // jacks-or-better-pair where 2 of first rank is jack, queen, king, ace suit-agnostic
       console.log('jacksOrBetter');
-      console.log(rankTally);
+      // console.log(rankTally);
     } else {
       // any worse than jacks pair
-      console.log('something else...');
-      console.log(rankTally);
+      console.log('worse than jacks...');
+      // console.log(rankTally);
     }
   } else {
     console.log('something else...');
-    console.log(rankTally);
+    // console.log(rankTally);
   }
 };
+
+const allConsecutives = (arr) => arr.every((num, i) => (arr[i + 1] || num + 1) - num === 1);
+
+const checkForStraightsAndFlushHands = (hand) => {
+  const suitTally = makeSuitTally(hand);
+  // console.log(suitTally);
+
+  const rankTally = makeRankTally(hand);
+  // console.log(rankTally);
+
+  const suitMaxVal = deriveMaxValue(suitTally);
+  // console.log(suitMaxVal);
+
+  const rankMaxVal = deriveMaxValue(rankTally);
+  // console.log(rankMaxVal);
+
+  const ranks = Object.keys(rankTally);
+  // console.log(ranks);
+
+  ranks.forEach((item, i) => {
+    ranks[i] = Number(item);
+  });
+
+  ranks.sort((a, b) => a - b);
+
+  // console.log(ranks);
+
+  // 5 of the same suit
+  if (suitMaxVal === 5) {
+    console.log('all of the same suit...');
+    // eslint-disable-next-line max-len
+    if (ranks[0] === 1 && ranks[1] === 10 && ranks[2] === 11 && ranks[3] === 12 && ranks[4] === 13) {
+      // royal-flush 5 of the same suit and A K Q J 10
+      console.log('royalFlush');
+    } else if (allConsecutives(ranks)) {
+      // straight-flush 5 of the same suit and consecutive ranks
+      console.log('straightFlush');
+    } else {
+      // flush 5 of the same suit and not consecutive ranks
+      console.log('flush');
+    }
+  } else {
+    console.log('not all of the same suit...');
+    if (allConsecutives(ranks) && rankMaxVal === 1) {
+      // straight 5 consecutive ranks and not all of the same suit
+      console.log('straight');
+    } else {
+      console.log('something else...');
+    }
+  }
+};
+
+const checkForAllHands = (hand) => {
+  checkForStraightsAndFlushHands(hand);
+  checkForSuitAgnosticHands(hand);
+};
+
+const makeTestCards = (cardSuit, cardRank) => {
+  const card = {
+    suit: cardSuit,
+    rank: cardRank,
+  };
+  playerHand.push(card);
+};
+
+/// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
+
+/// payout function to-do
+
+/// declaring win status to-do
+
+/// dont forget instructions with tooltps
+
+/// wireframe for mobile
+
+/// follow blue screen video poker model layout
