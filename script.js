@@ -239,13 +239,6 @@ const dealCards = () => {
   }
 };
 
-const initGame = () => {
-  shuffledDeck = shuffleCards(makeDeck());
-  fullPayTable = makePayTable();
-};
-
-initGame();
-
 const makeTestCards = (cardSuit, cardRank) => {
   const card = {
     suit: cardSuit,

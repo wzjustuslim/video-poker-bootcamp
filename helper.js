@@ -93,3 +93,11 @@ const makePayTable = () => {
   newTable[newTable.length - 1].royalFlush = 4000;
   return newTable;
 };
+
+const initGame = () => {
+  shuffledDeck = shuffleCards(makeDeck());
+  fullPayTable = makePayTable();
+  payKeys = Object.keys(fullPayTable[0]);
+};
+
+initGame();

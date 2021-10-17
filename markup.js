@@ -37,3 +37,26 @@ buttonDeal.classList.add('btn');
 buttonDeal.innerText = 'DEAL';
 buttonDeal.disabled = true;
 buttonContainer.appendChild(buttonDeal);
+
+const payoutTable = document.createElement('div');
+payoutTable.classList.add('payout-table');
+tableContainer.appendChild(payoutTable);
+
+const labelNames = ['ROYAL FLUSH............', 'STRAIGHT FLUSH......', 'FOUR OF A KIND........', 'FULL HOUSE..............', 'FLUSH.........................', 'STRAIGHT...................', 'THREE OF A KIND......', 'TWO PAIR...................', 'JACKS OR BETTER...'];
+
+for (let i = 0; i < 9; i += 1) {
+  const row = document.createElement('div');
+  row.classList.add('row');
+  payoutTable.appendChild(row);
+  const currKey = payKeys[i];
+  const label = document.createElement('div');
+  label.classList.add('label');
+  label.innerText = labelNames[i];
+  row.appendChild(label);
+  for (let j = 0; j < 5; j += 1) {
+    const col = document.createElement('div');
+    col.classList.add('col');
+    col.innerText = fullPayTable[j][currKey];
+    row.appendChild(col);
+  }
+}
