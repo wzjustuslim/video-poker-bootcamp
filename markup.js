@@ -19,5 +19,5 @@ infoContainer.classList.add('info-container');
 gameContainer.appendChild(infoContainer);
 
 const buttonContainer = document.createElement('div');
-buttonContainer.classList.add('button-contaner');
+buttonContainer.classList.add('button-container');
 gameContainer.appendChild(buttonContainer);
