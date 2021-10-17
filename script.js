@@ -1,11 +1,3 @@
-const toggleDiscard = (playerCard) => {
-  if (playerCard.isDiscard === false) {
-    playerCard.isDiscard = true;
-  } else {
-    playerCard.isDiscard = false;
-  }
-};
-
 const drawFive = () => {
   for (let i = 0; i < 5; i += 1) {
     playerHand.push(shuffledDeck.pop());
@@ -39,6 +31,7 @@ const makeBetOne = () => {
   if (currentBet < 5) {
     deductBet(1);
     selectPayouts(currentBet);
+    renderTable();
   }
   if (currentBet >= 5) {
     disableBets(true);
@@ -51,6 +44,7 @@ const makeBetMax = () => {
   if (currentBet < 5) {
     deductBet(5 - currentBet);
     selectPayouts(currentBet);
+    renderTable();
   }
   if (currentBet >= 5) {
     disableBets(true);
@@ -231,11 +225,14 @@ const dealCards = () => {
   if (playerHand.length < 5) {
     disableBets(true);
     drawFive();
+    renderCards();
   } else if (playerHand.length === 5) {
     discardAndReplace();
+    renderCards();
     calcHandScore(playerHand);
     disableBets(false);
     buttonDeal.disabled = true;
+    renderTable();
   }
 };
 
@@ -259,3 +256,10 @@ const makeTestCards = (cardSuit, cardRank) => {
 buttonOne.addEventListener('click', makeBetOne);
 buttonMax.addEventListener('click', makeBetMax);
 buttonDeal.addEventListener('click', dealCards);
+
+// cardHolder[1].addEventListener('click', toggleDiscard);
+// cardHolder[2].addEventListener('click', toggleDiscard);
+// cardHolder[3].addEventListener('click', toggleDiscard);
+// cardHolder[4].addEventListener('click', toggleDiscard);
+
+// cardHolder[0].addEventListener('click', toggleDiscard);

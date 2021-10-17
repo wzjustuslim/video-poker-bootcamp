@@ -100,4 +100,13 @@ const initGame = () => {
   payKeys = Object.keys(fullPayTable[0]);
 };
 
+const toggleDiscard = () => {
+  if (playerHand[0].isDiscard === false) {
+    playerHand[0].isDiscard = true;
+  } else {
+    playerHand.isDiscard = false;
+  }
+  console.log('discard!');
+};
+
 initGame();

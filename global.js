@@ -13,3 +13,5 @@ let shuffledDeck = [];
 let fullPayTable = [];
 
 let payKeys = [];
+
+let cardHolder = [];
