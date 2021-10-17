@@ -111,30 +111,14 @@ const renderCards = () => {
       suit.classList.add(playerHand[i].color);
       bottomRank.classList.add(playerHand[i].color);
 
-      card.addEventListener('click', toggleDiscard); // maybe use an annonymous function
+      // eslint-disable-next-line no-loop-func
+      card.addEventListener('click', () => {
+        console.log(playerHand[i]);
+        toggleDiscard(playerHand[i]);
+      });
     }
     cardHolder.push(card);
   }
 };
 
 renderCards();
-
-// const cardOne = document.createElement('div');
-// cardOne.classList.add('card');
-// cardContainer.appendChild(cardOne);
-
-// const cardTwo = document.createElement('div');
-// cardTwo.classList.add('card');
-// cardContainer.appendChild(cardTwo);
-
-// const cardTre = document.createElement('div');
-// cardTre.classList.add('card');
-// cardContainer.appendChild(cardTre);
-
-// const cardFou = document.createElement('div');
-// cardFou.classList.add('card');
-// cardContainer.appendChild(cardFou);
-
-// const cardFiv = document.createElement('div');
-// cardFiv.classList.add('card');
-// cardContainer.appendChild(cardFiv);

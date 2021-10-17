@@ -100,9 +100,9 @@ const initGame = () => {
   payKeys = Object.keys(fullPayTable[0]);
 };
 
-const toggleDiscard = () => {
-  if (playerHand[0].isDiscard === false) {
-    playerHand[0].isDiscard = true;
+const toggleDiscard = (playerHand) => {
+  if (playerHand.isDiscard === false) {
+    playerHand.isDiscard = true;
   } else {
     playerHand.isDiscard = false;
   }
