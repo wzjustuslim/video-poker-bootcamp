@@ -19,7 +19,7 @@ body {
 }
 
 .table-container {
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   justify-content: space-around;
   width: 75%;
@@ -27,7 +27,7 @@ body {
 }
 
 .card-container {
-  background-color: lime;
+  /* background-color: lime; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -36,7 +36,7 @@ body {
 }
 
 .info-container {
-  background-color: yellow;
+  /* background-color: yellow; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,11 +46,20 @@ body {
 }
 
 .button-container {
-  background-color: magenta;
+  /* background-color: magenta; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   width: 25%;
   height: 40%;
+}
+
+.btn {
+  background-color: yellow;
+  width: 80%;
+  height: 20%;
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 7px;
 }

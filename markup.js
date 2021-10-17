@@ -21,3 +21,19 @@ gameContainer.appendChild(infoContainer);
 const buttonContainer = document.createElement('div');
 buttonContainer.classList.add('button-container');
 gameContainer.appendChild(buttonContainer);
+
+const buttonOne = document.createElement('button');
+buttonOne.classList.add('btn');
+buttonOne.innerText = 'BET ONE';
+buttonContainer.appendChild(buttonOne);
+
+const buttonMax = document.createElement('button');
+buttonMax.classList.add('btn');
+buttonMax.innerText = 'BET MAX';
+buttonContainer.appendChild(buttonMax);
+
+const buttonDeal = document.createElement('button');
+buttonDeal.classList.add('btn');
+buttonDeal.innerText = 'DEAL';
+buttonDeal.disabled = true;
+buttonContainer.appendChild(buttonDeal);

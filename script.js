@@ -29,10 +29,33 @@ const selectPayouts = (playerBet) => {
   currentPayouts = fullPayTable[playerBet - 1];
 };
 
-const makeBet = (playerBet) => {
+const disableBets = (bool) => {
+  buttonOne.disabled = bool;
+  buttonMax.disabled = bool;
+};
+
+const makeBetOne = () => {
   playerHand = [];
-  deductBet(playerBet);
-  selectPayouts(currentBet);
+  if (currentBet < 5) {
+    deductBet(1);
+    selectPayouts(currentBet);
+  }
+  if (currentBet >= 5) {
+    disableBets(true);
+  }
+  buttonDeal.disabled = false;
+};
+
+const makeBetMax = () => {
+  playerHand = [];
+  if (currentBet < 5) {
+    deductBet(5 - currentBet);
+    selectPayouts(currentBet);
+  }
+  if (currentBet >= 5) {
+    disableBets(true);
+  }
+  buttonDeal.disabled = false;
 };
 
 const makeRankTally = (hand) => {
@@ -206,10 +229,13 @@ const calcHandScore = (hand) => {
 
 const dealCards = () => {
   if (playerHand.length < 5) {
+    disableBets(true);
     drawFive();
   } else if (playerHand.length === 5) {
     discardAndReplace();
     calcHandScore(playerHand);
+    disableBets(false);
+    buttonDeal.disabled = true;
   }
 };
 
@@ -236,3 +262,7 @@ const makeTestCards = (cardSuit, cardRank) => {
 /// declaring win status dont forget instructions with tooltps
 
 /// integrate html/css with js assume 16:9 ratio
+
+buttonOne.addEventListener('click', makeBetOne);
+buttonMax.addEventListener('click', makeBetMax);
+buttonDeal.addEventListener('click', dealCards);
