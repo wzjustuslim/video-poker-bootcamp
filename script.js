@@ -231,8 +231,8 @@ const makeTestCards = (cardSuit, cardRank) => {
 
 /// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
 
-/// declaring win status
-/// dont forget instructions with tooltps
+/// edge cases of running out of cards or credits
 
-/// follow blue screen video poker model layout
-/// wireframe for mobile
+/// declaring win status dont forget instructions with tooltps
+
+/// integrate html/css with js assume 16:9 ratio

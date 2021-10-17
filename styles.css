@@ -1,3 +1,16 @@
 body {
   background-color: pink;
 }
+
+.general-container {
+  display: flex;
+  background-color: black;
+  height: 97vh;
+}
+
+.game-container {
+  display: flex;
+  background-color: blue;
+  width: 80%;
+  height: 80%;
+}
