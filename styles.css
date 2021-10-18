@@ -1,5 +1,5 @@
 body {
-  background-color: pink;
+  background-color: black;
 }
 
 .general-container {
@@ -8,6 +8,7 @@ body {
   align-items: center;
   background-color: black;
   height: 97vh;
+  background-image: url("images/pixel-jeff-clipa-s.gif");
 }
 
 .game-container {
@@ -16,6 +17,9 @@ body {
   background-color: blue;
   width: 65%;
   height: 80%;
+  border-radius: 20px;
+  border: solid;
+  border-width: 10px;
 }
 
 .table-container {
