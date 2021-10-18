@@ -289,10 +289,6 @@ const makeTestCards = (cardSuit, cardRank) => {
   playerHand.push(card);
 };
 
-/// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
-
-/// integrate html/css with js assume 16:9 ratio
-
 buttonArray[0].addEventListener('click', makeBetOne);
 buttonArray[1].addEventListener('click', makeBetMax);
 buttonArray[2].addEventListener('click', dealCards);

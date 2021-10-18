@@ -59,7 +59,7 @@ const renderTable = () => {
   payoutTable.classList.add('payout-table');
   tableContainer.appendChild(payoutTable);
 
-  const labelNames = ['ROYAL FLUSH ................', 'STRAIGHT FLUSH .............', 'FOUR OF A KIND .............', 'FULL HOUSE .................', 'FLUSH ......................', 'STRAIGHT ...................', 'THREE OF A KIND ............', 'TWO PAIR ...................', 'JACKS OR BETTER ............'];
+  const labelNames = ['ROYAL FLUSH ..........', 'STRAIGHT FLUSH .......', 'FOUR OF A KIND .......', 'FULL HOUSE ...........', 'FLUSH ................', 'STRAIGHT .............', 'THREE OF A KIND ......', 'TWO PAIR .............', 'JACKS OR BETTER ......'];
 
   for (let i = 0; i < payKeys.length; i += 1) {
     const row = document.createElement('div');
@@ -147,6 +147,25 @@ const renderInfo = () => {
   iconContainer.classList.add('icon-container');
   infoContainer.appendChild(iconContainer);
 
+  const cardTipBlock = document.createElement('div');
+  cardTipBlock.classList.add('card-tip');
+  cardTipBlock.classList.add('tooltip');
+  iconContainer.appendChild(cardTipBlock);
+
+  const toolText = document.createElement('span');
+  toolText.classList.add('tooltiptext');
+  toolText.innerHTML = 'Royal Flush: A K Q J 10 and all of the same suit.<br><br>Straight Flush: Five sequential cards and all of the same suit.<br><br>Four Of A Kind: Four cards of one rank.<br><br>Full House: Three cards of one rank and two of another.<br><br>Flush: Five cards all of the same suit but not in sequence.<br><br>Straight: Five cards in sequence but not of the same suit.<br><br>Three Of A Kind: Three cards of one rank and two of two different ranks.<br><br>Two Pair: Two cards of one rank and two cards of another.<br><br>Jacks Or Better: A pair of J Q K A only.';
+  cardTipBlock.appendChild(toolText);
+
+  const playBgmBlock = document.createElement('div');
+  playBgmBlock.classList.add('play-bgm');
+  iconContainer.appendChild(playBgmBlock);
+
+  const cardTip = document.createElement('i');
+  cardTip.classList.add('far');
+  cardTip.classList.add('fa-question-circle');
+  cardTipBlock.appendChild(cardTip);
+
   const playBGM = document.createElement('i');
   playBGM.classList.add('fas');
   if (bgm.paused) {
@@ -154,7 +173,7 @@ const renderInfo = () => {
   } else {
     playBGM.classList.add('fa-volume-up');
   }
-  iconContainer.appendChild(playBGM);
+  playBgmBlock.appendChild(playBGM);
 
   playBGM.addEventListener('click', () => {
     if (bgm.paused) {
@@ -169,6 +188,15 @@ const renderInfo = () => {
       bgm.pause();
     }
   });
+
+  const logoContainer = document.createElement('div');
+  logoContainer.classList.add('logo-container');
+  infoContainer.appendChild(logoContainer);
+
+  const logo = document.createElement('img');
+  logo.src = 'images/logo_video-poker.png';
+  logo.classList.add('logo');
+  logoContainer.appendChild(logo);
 
   const instruct = document.createElement('div');
   instruct.classList.add('user-info');
@@ -187,3 +215,8 @@ const renderInfo = () => {
 };
 
 renderInfo();
+
+// cards can be emptied at the end of round
+// js doc should be added to functions
+// words can flash with interval
+// card backing can be made
