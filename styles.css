@@ -118,10 +118,17 @@ body {
   height: 100%;
 }
 
-.hold {
-  color: white;
+.hold-hide {
+  color: blue;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+.hold-show {
+  color: red;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
 }
 
 .card {

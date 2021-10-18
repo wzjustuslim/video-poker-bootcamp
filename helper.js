@@ -109,4 +109,12 @@ const toggleDiscard = (playerHand) => {
   console.log('discard!');
 };
 
+const displayHold = (playerHand, place) => {
+  if (playerHand.isDiscard === false) {
+    place.className = 'hold-show';
+  } else {
+    place.className = 'hold-hide';
+  }
+};
+
 initGame();

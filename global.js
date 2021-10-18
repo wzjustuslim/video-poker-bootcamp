@@ -15,3 +15,5 @@ let fullPayTable = [];
 let payKeys = [];
 
 let cardHolder = [];
+
+let holdArray = [];

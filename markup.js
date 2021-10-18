@@ -74,7 +74,7 @@ renderTable();
 
 const renderCards = () => {
   cardContainer.innerHTML = '';
-  cardHolder = [];
+  holdArray = [];
 
   for (let i = 0; i < 5; i += 1) {
     const slots = document.createElement('div');
@@ -82,9 +82,11 @@ const renderCards = () => {
     cardContainer.appendChild(slots);
 
     const hold = document.createElement('div');
-    hold.classList.add('hold');
+    hold.classList.add('hold-hide');
     hold.innerText = 'HOLD';
     slots.appendChild(hold);
+
+    holdArray.push(hold);
 
     const card = document.createElement('div');
     card.classList.add('card');
@@ -115,6 +117,7 @@ const renderCards = () => {
       card.addEventListener('click', () => {
         console.log(playerHand[i]);
         toggleDiscard(playerHand[i]);
+        displayHold(playerHand[i], holdArray[i]);
       });
     }
     cardHolder.push(card);

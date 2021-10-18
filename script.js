@@ -256,10 +256,3 @@ const makeTestCards = (cardSuit, cardRank) => {
 buttonOne.addEventListener('click', makeBetOne);
 buttonMax.addEventListener('click', makeBetMax);
 buttonDeal.addEventListener('click', dealCards);
-
-// cardHolder[1].addEventListener('click', toggleDiscard);
-// cardHolder[2].addEventListener('click', toggleDiscard);
-// cardHolder[3].addEventListener('click', toggleDiscard);
-// cardHolder[4].addEventListener('click', toggleDiscard);
-
-// cardHolder[0].addEventListener('click', toggleDiscard);
