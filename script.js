@@ -32,23 +32,36 @@ const makeBetOne = () => {
     deductBet(1);
     selectPayouts(currentBet);
     renderTable();
-    renderInfo();
+    currentMsg = 'MAX IT OUT!';
   }
   if (currentBet >= 5) {
     disableBets(true);
+    currentMsg = 'HIT DEAL!';
   }
+  if (playerCredits < 1) {
+    disableBets(true);
+  }
+  renderInfo();
   buttonArray[2].disabled = false;
 };
 
 const makeBetMax = () => {
   playerHand = [];
   if (currentBet < 5) {
-    deductBet(5 - currentBet);
+    if (playerCredits < 5) {
+      deductBet(playerCredits);
+    } else {
+      deductBet(5 - currentBet);
+    }
     selectPayouts(currentBet);
     renderTable();
+    currentMsg = 'HIT DEAL!';
     renderInfo();
   }
   if (currentBet >= 5) {
+    disableBets(true);
+  }
+  if (playerCredits < 5) {
     disableBets(true);
   }
   buttonArray[2].disabled = false;
@@ -129,22 +142,22 @@ const checkForStraightsAndFlushHands = (hand) => {
     // eslint-disable-next-line max-len
     if (ranks[0] === 1 && ranks[1] === 10 && ranks[2] === 11 && ranks[3] === 12 && ranks[4] === 13) {
       // royal-flush 5 of the same suit and A K Q J 10
-      console.log('royalFlush');
+      currentMsg = 'ROYAL FLUSH! BET AGAIN?';
       handType = 'royalFlush';
     } else if (allConsecutives(ranks)) {
       // straight-flush 5 of the same suit and consecutive ranks
-      console.log('straightFlush');
+      currentMsg = 'STRAIGHT FLUSH! BET AGAIN?';
       handType = 'straightFlush';
     } else {
       // flush 5 of the same suit and not consecutive ranks
-      console.log('flush');
+      currentMsg = 'FLUSH! BET AGAIN?';
       handType = 'flush';
     }
   } else {
     console.log('not all of the same suit...');
     if (allConsecutives(ranks) && rankMaxVal === 1) {
       // straight 5 consecutive ranks and not all of the same suit
-      console.log('straight');
+      currentMsg = 'STRAIGHT! BET AGAIN?';
       handType = 'straight';
     } else {
       console.log('something else... proceeding to next check...');
@@ -166,35 +179,35 @@ const checkForSuitAgnosticHands = (hand) => {
   let handType = '';
   if (rankMaxVal === 4 && rankKeysLen === 2) {
     /// four-of-a-kind where 4 of first rank and 1 of second rank suit-agnostic
-    console.log('fourOfAKind');
+    currentMsg = 'FOUR OF A KIND! BET AGAIN?';
     handType = 'fourOfAKind';
   } else if (rankMaxVal === 3 && rankKeysLen === 2) {
     /// full-house where 3 of first rank and 2 of second rank suit-agnostic
-    console.log('fullHouse');
+    currentMsg = 'FULL HOUSE! BET AGAIN?';
     handType = 'fullHouse';
   } else if (rankMaxVal === 3 && rankKeysLen === 3) {
     /// three-of-a-kind where 3 of first rank and 1 of second rank and 1 of third rank suit-agnostic
-    console.log('threeOfAKind');
+    currentMsg = 'THREE OF A KIND! BET AGAIN?';
     handType = 'threeOfAKind';
   } else if (rankMaxVal === 2 && rankKeysLen === 3) {
     /// two-pair where 2 of first rank and 2 of second rank and 1 of third rank suit-agnostic
-    console.log('twoPair');
+    currentMsg = 'TWO PAIR! BET AGAIN?';
     handType = 'twoPair';
   } else if (rankMaxVal === 2 && rankKeysLen === 4) {
     console.log('a pair...');
     /// pair where 2 of first rank and 1 of second rank and 1 of third rank and 1 of fourth rank
     if (rankTally[11] === 2 || rankTally[12] === 2 || rankTally[13] === 2 || rankTally[1] === 2) {
       // jacks-or-better-pair where 2 of first rank is jack, queen, king, ace suit-agnostic
-      console.log('jacksOrBetter');
+      currentMsg = 'JACKS OR BETTER! BET AGAIN?';
       handType = 'jacksOrBetter';
       // console.log(rankTally);
     } else {
       // any worse than jacks pair
-      console.log('worse than jacks...');
+      currentMsg = 'NOT GOOD ENOUGH! BET AGAIN?';
       // console.log(rankTally);
     }
   } else {
-    console.log('something else...');
+    currentMsg = 'SORRY! BET AGAIN?';
     // console.log(rankTally);
   }
   return handType;
@@ -223,17 +236,31 @@ const calcHandScore = (hand) => {
   playerCredits += makePayout(payoutKey);
 };
 
+const prepareDeck = () => {
+  shuffledDeck = shuffleCards(makeDeck());
+};
+
 const dealCards = () => {
   if (playerHand.length < 5) {
     disableBets(true);
+    prepareDeck();
     drawFive();
     renderCards();
+    currentMsg = 'SELECT CARDS TO HOLD!';
+    renderInfo();
   } else if (playerHand.length === 5) {
     discardAndReplace();
     renderCards();
     calcHandScore(playerHand);
+    if (playerCredits === 0) {
+      currentMsg = 'GAME OVER!';
+    }
+    if (playerCredits < 5 && playerCredits > 0) {
+      buttonArray[0].disabled = false;
+    } else if (playerCredits >= 5) {
+      disableBets(false);
+    }
     renderInfo();
-    disableBets(false);
     buttonArray[2].disabled = true;
     renderTable();
   }

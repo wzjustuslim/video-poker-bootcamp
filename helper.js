@@ -95,7 +95,6 @@ const makePayTable = () => {
 };
 
 const initGame = () => {
-  shuffledDeck = shuffleCards(makeDeck());
   fullPayTable = makePayTable();
   payKeys = Object.keys(fullPayTable[0]);
 };

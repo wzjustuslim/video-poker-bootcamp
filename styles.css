@@ -188,3 +188,14 @@ body {
   text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
   font-size: 150%;
 }
+
+.user-info {
+  display: flex;
+  text-align: center;
+  margin: 5%;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: red;
+  text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
+  font-size: 150%;
+}

@@ -1,30 +1,26 @@
-const renderContainers = () => {
-  const generalContainer = document.createElement('div');
-  generalContainer.classList.add('general-container');
-  document.body.appendChild(generalContainer);
+const generalContainer = document.createElement('div');
+generalContainer.classList.add('general-container');
+document.body.appendChild(generalContainer);
 
-  const gameContainer = document.createElement('div');
-  gameContainer.classList.add('game-container');
-  generalContainer.appendChild(gameContainer);
+const gameContainer = document.createElement('div');
+gameContainer.classList.add('game-container');
+generalContainer.appendChild(gameContainer);
 
-  const tableContainer = document.createElement('div');
-  tableContainer.classList.add('table-container');
-  gameContainer.appendChild(tableContainer);
+const tableContainer = document.createElement('div');
+tableContainer.classList.add('table-container');
+gameContainer.appendChild(tableContainer);
 
-  const cardContainer = document.createElement('div');
-  cardContainer.classList.add('card-container');
-  gameContainer.appendChild(cardContainer);
+const cardContainer = document.createElement('div');
+cardContainer.classList.add('card-container');
+gameContainer.appendChild(cardContainer);
 
-  const infoContainer = document.createElement('div');
-  infoContainer.classList.add('info-container');
-  gameContainer.appendChild(infoContainer);
+const infoContainer = document.createElement('div');
+infoContainer.classList.add('info-container');
+gameContainer.appendChild(infoContainer);
 
-  const buttonContainer = document.createElement('div');
-  buttonContainer.classList.add('button-container');
-  gameContainer.appendChild(buttonContainer);
-};
-
-renderContainers();
+const buttonContainer = document.createElement('div');
+buttonContainer.classList.add('button-container');
+gameContainer.appendChild(buttonContainer);
 
 const renderButtons = () => {
   const buttonLabels = ['BET ONE', 'BET MAX', 'DEAL'];
@@ -133,6 +129,11 @@ renderCards();
 
 const renderInfo = () => {
   infoContainer.innerHTML = '';
+
+  const instruct = document.createElement('div');
+  instruct.classList.add('user-info');
+  instruct.innerText = `${currentMsg}`;
+  infoContainer.appendChild(instruct);
 
   const bet = document.createElement('div');
   bet.classList.add('bet-info');
