@@ -60,6 +60,7 @@ body {
   background-color: yellow;
   width: 80%;
   height: 20%;
+  font-family: "Press Start 2P", cursive;
   font-weight: bold;
   max-width: 250px;
 }
@@ -73,7 +74,7 @@ body {
   height: 90%;
   border: solid;
   border-width: 3px;
-  font-family: sans-serif;
+  font-family: "Press Start 2P", cursive;
   font-size: 80%;
 }
 
@@ -172,29 +173,38 @@ body {
 .bet-info {
   display: flex;
   margin: 5%;
-  font-family: sans-serif;
+  font-family: "Press Start 2P", cursive;
   font-weight: bold;
   color: red;
   text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
-  font-size: 150%;
+  font-size: 120%;
 }
 
 .credit-info {
   display: flex;
   margin: 5%;
-  font-family: sans-serif;
+  font-family: "Press Start 2P", cursive;
   font-weight: bold;
   color: red;
   text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
-  font-size: 150%;
+  font-size: 120%;
 }
 
 .user-info {
   display: flex;
   text-align: center;
   margin: 5%;
-  font-family: sans-serif;
+  font-family: "Press Start 2P", cursive;
   font-weight: bold;
+  color: red;
+  text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
+  font-size: 120%;
+}
+
+.icon-container {
+  /* background-color: white; */
+  display: flex;
+  align-self: center;
   color: red;
   text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
   font-size: 150%;

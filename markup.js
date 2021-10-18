@@ -22,6 +22,19 @@ const buttonContainer = document.createElement('div');
 buttonContainer.classList.add('button-container');
 gameContainer.appendChild(buttonContainer);
 
+const bgm = new Audio('audio/theStardropSaloon.mp3');
+bgm.loop = 'true';
+
+const betAudio = new Audio('audio/purchaseClick.wav');
+
+const dealAudio = new Audio('audio/select.wav');
+
+const holdAudio = new Audio('audio/jingle1.wav');
+
+const lousyAudio = new Audio('audio/cacklingWitch.wav');
+
+const winAudio = new Audio('audio/secret1.wav');
+
 const renderButtons = () => {
   const buttonLabels = ['BET ONE', 'BET MAX', 'DEAL'];
 
@@ -46,7 +59,7 @@ const renderTable = () => {
   payoutTable.classList.add('payout-table');
   tableContainer.appendChild(payoutTable);
 
-  const labelNames = ['ROYAL FLUSH............', 'STRAIGHT FLUSH......', 'FOUR OF A KIND........', 'FULL HOUSE..............', 'FLUSH.........................', 'STRAIGHT...................', 'THREE OF A KIND......', 'TWO PAIR...................', 'JACKS OR BETTER...'];
+  const labelNames = ['ROYAL FLUSH ................', 'STRAIGHT FLUSH .............', 'FOUR OF A KIND .............', 'FULL HOUSE .................', 'FLUSH ......................', 'STRAIGHT ...................', 'THREE OF A KIND ............', 'TWO PAIR ...................', 'JACKS OR BETTER ............'];
 
   for (let i = 0; i < payKeys.length; i += 1) {
     const row = document.createElement('div');
@@ -129,6 +142,33 @@ renderCards();
 
 const renderInfo = () => {
   infoContainer.innerHTML = '';
+
+  const iconContainer = document.createElement('div');
+  iconContainer.classList.add('icon-container');
+  infoContainer.appendChild(iconContainer);
+
+  const playBGM = document.createElement('i');
+  playBGM.classList.add('fas');
+  if (bgm.paused) {
+    playBGM.classList.add('fa-volume-mute');
+  } else {
+    playBGM.classList.add('fa-volume-up');
+  }
+  iconContainer.appendChild(playBGM);
+
+  playBGM.addEventListener('click', () => {
+    if (bgm.paused) {
+      playBGM.className = '';
+      playBGM.classList.add('fas');
+      playBGM.classList.add('fa-volume-up');
+      bgm.play();
+    } else {
+      playBGM.className = '';
+      playBGM.classList.add('fas');
+      playBGM.classList.add('fa-volume-mute');
+      bgm.pause();
+    }
+  });
 
   const instruct = document.createElement('div');
   instruct.classList.add('user-info');

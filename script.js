@@ -29,6 +29,7 @@ const disableBets = (bool) => {
 const makeBetOne = () => {
   playerHand = [];
   if (currentBet < 5) {
+    betAudio.play();
     deductBet(1);
     selectPayouts(currentBet);
     renderTable();
@@ -48,6 +49,7 @@ const makeBetOne = () => {
 const makeBetMax = () => {
   playerHand = [];
   if (currentBet < 5) {
+    betAudio.play();
     if (playerCredits < 5) {
       deductBet(playerCredits);
     } else {
@@ -144,14 +146,17 @@ const checkForStraightsAndFlushHands = (hand) => {
       // royal-flush 5 of the same suit and A K Q J 10
       currentMsg = 'ROYAL FLUSH! BET AGAIN?';
       handType = 'royalFlush';
+      winAudio.play();
     } else if (allConsecutives(ranks)) {
       // straight-flush 5 of the same suit and consecutive ranks
       currentMsg = 'STRAIGHT FLUSH! BET AGAIN?';
       handType = 'straightFlush';
+      winAudio.play();
     } else {
       // flush 5 of the same suit and not consecutive ranks
       currentMsg = 'FLUSH! BET AGAIN?';
       handType = 'flush';
+      winAudio.play();
     }
   } else {
     console.log('not all of the same suit...');
@@ -159,6 +164,7 @@ const checkForStraightsAndFlushHands = (hand) => {
       // straight 5 consecutive ranks and not all of the same suit
       currentMsg = 'STRAIGHT! BET AGAIN?';
       handType = 'straight';
+      winAudio.play();
     } else {
       console.log('something else... proceeding to next check...');
     }
@@ -181,33 +187,40 @@ const checkForSuitAgnosticHands = (hand) => {
     /// four-of-a-kind where 4 of first rank and 1 of second rank suit-agnostic
     currentMsg = 'FOUR OF A KIND! BET AGAIN?';
     handType = 'fourOfAKind';
+    winAudio.play();
   } else if (rankMaxVal === 3 && rankKeysLen === 2) {
     /// full-house where 3 of first rank and 2 of second rank suit-agnostic
     currentMsg = 'FULL HOUSE! BET AGAIN?';
     handType = 'fullHouse';
+    winAudio.play();
   } else if (rankMaxVal === 3 && rankKeysLen === 3) {
     /// three-of-a-kind where 3 of first rank and 1 of second rank and 1 of third rank suit-agnostic
     currentMsg = 'THREE OF A KIND! BET AGAIN?';
     handType = 'threeOfAKind';
+    winAudio.play();
   } else if (rankMaxVal === 2 && rankKeysLen === 3) {
     /// two-pair where 2 of first rank and 2 of second rank and 1 of third rank suit-agnostic
     currentMsg = 'TWO PAIR! BET AGAIN?';
     handType = 'twoPair';
+    winAudio.play();
   } else if (rankMaxVal === 2 && rankKeysLen === 4) {
-    console.log('a pair...');
+    // console.log('a pair...');
     /// pair where 2 of first rank and 1 of second rank and 1 of third rank and 1 of fourth rank
     if (rankTally[11] === 2 || rankTally[12] === 2 || rankTally[13] === 2 || rankTally[1] === 2) {
       // jacks-or-better-pair where 2 of first rank is jack, queen, king, ace suit-agnostic
       currentMsg = 'JACKS OR BETTER! BET AGAIN?';
       handType = 'jacksOrBetter';
+      winAudio.play();
       // console.log(rankTally);
     } else {
       // any worse than jacks pair
       currentMsg = 'NOT GOOD ENOUGH! BET AGAIN?';
+      lousyAudio.play();
       // console.log(rankTally);
     }
   } else {
     currentMsg = 'SORRY! BET AGAIN?';
+    lousyAudio.play();
     // console.log(rankTally);
   }
   return handType;
@@ -242,6 +255,7 @@ const prepareDeck = () => {
 
 const dealCards = () => {
   if (playerHand.length < 5) {
+    dealAudio.play();
     disableBets(true);
     prepareDeck();
     drawFive();

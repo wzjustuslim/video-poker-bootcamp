@@ -103,8 +103,10 @@ initGame();
 
 const toggleDiscard = (playerHand) => {
   if (playerHand.isDiscard === false) {
+    holdAudio.play();
     playerHand.isDiscard = true;
   } else {
+    holdAudio.play();
     playerHand.isDiscard = false;
   }
   console.log('discard!');
