@@ -168,3 +168,23 @@ body {
   font-weight: bold;
   font-size: 150%;
 }
+
+.bet-info {
+  display: flex;
+  margin: 5%;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: red;
+  text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
+  font-size: 150%;
+}
+
+.credit-info {
+  display: flex;
+  margin: 5%;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: red;
+  text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
+  font-size: 150%;
+}

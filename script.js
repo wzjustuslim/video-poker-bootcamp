@@ -32,6 +32,7 @@ const makeBetOne = () => {
     deductBet(1);
     selectPayouts(currentBet);
     renderTable();
+    renderInfo();
   }
   if (currentBet >= 5) {
     disableBets(true);
@@ -45,6 +46,7 @@ const makeBetMax = () => {
     deductBet(5 - currentBet);
     selectPayouts(currentBet);
     renderTable();
+    renderInfo();
   }
   if (currentBet >= 5) {
     disableBets(true);
@@ -230,6 +232,7 @@ const dealCards = () => {
     discardAndReplace();
     renderCards();
     calcHandScore(playerHand);
+    renderInfo();
     disableBets(false);
     buttonDeal.disabled = true;
     renderTable();

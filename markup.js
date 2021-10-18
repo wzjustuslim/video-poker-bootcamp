@@ -125,3 +125,19 @@ const renderCards = () => {
 };
 
 renderCards();
+
+const renderInfo = () => {
+  infoContainer.innerHTML = '';
+
+  const bet = document.createElement('div');
+  bet.classList.add('bet-info');
+  bet.innerText = `BET ${currentBet}`;
+  infoContainer.appendChild(bet);
+
+  const credit = document.createElement('div');
+  credit.classList.add('credit-info');
+  credit.innerText = `CREDIT ${playerCredits}`;
+  infoContainer.appendChild(credit);
+};
+
+renderInfo();
