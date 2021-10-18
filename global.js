@@ -17,3 +17,5 @@ let payKeys = [];
 let cardHolder = [];
 
 let holdArray = [];
+
+let buttonArray = [];

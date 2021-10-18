@@ -100,6 +100,8 @@ const initGame = () => {
   payKeys = Object.keys(fullPayTable[0]);
 };
 
+initGame();
+
 const toggleDiscard = (playerHand) => {
   if (playerHand.isDiscard === false) {
     playerHand.isDiscard = true;
@@ -116,5 +118,3 @@ const displayHold = (playerHand, place) => {
     place.className = 'hold-hide';
   }
 };
-
-initGame();

@@ -22,8 +22,8 @@ const selectPayouts = (playerBet) => {
 };
 
 const disableBets = (bool) => {
-  buttonOne.disabled = bool;
-  buttonMax.disabled = bool;
+  buttonArray[0].disabled = bool;
+  buttonArray[1].disabled = bool;
 };
 
 const makeBetOne = () => {
@@ -37,7 +37,7 @@ const makeBetOne = () => {
   if (currentBet >= 5) {
     disableBets(true);
   }
-  buttonDeal.disabled = false;
+  buttonArray[2].disabled = false;
 };
 
 const makeBetMax = () => {
@@ -51,7 +51,7 @@ const makeBetMax = () => {
   if (currentBet >= 5) {
     disableBets(true);
   }
-  buttonDeal.disabled = false;
+  buttonArray[2].disabled = false;
 };
 
 const makeRankTally = (hand) => {
@@ -234,7 +234,7 @@ const dealCards = () => {
     calcHandScore(playerHand);
     renderInfo();
     disableBets(false);
-    buttonDeal.disabled = true;
+    buttonArray[2].disabled = true;
     renderTable();
   }
 };
@@ -250,12 +250,8 @@ const makeTestCards = (cardSuit, cardRank) => {
 
 /// bet -> dealOne -> toggle -> dealTwo -> calc // bet calc -> bet -> circular logic
 
-/// edge cases of running out of cards or credits
-
-/// declaring win status dont forget instructions with tooltps
-
 /// integrate html/css with js assume 16:9 ratio
 
-buttonOne.addEventListener('click', makeBetOne);
-buttonMax.addEventListener('click', makeBetMax);
-buttonDeal.addEventListener('click', dealCards);
+buttonArray[0].addEventListener('click', makeBetOne);
+buttonArray[1].addEventListener('click', makeBetMax);
+buttonArray[2].addEventListener('click', dealCards);

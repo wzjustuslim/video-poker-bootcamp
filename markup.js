@@ -1,42 +1,47 @@
-const generalContainer = document.createElement('div');
-generalContainer.classList.add('general-container');
-document.body.appendChild(generalContainer);
+const renderContainers = () => {
+  const generalContainer = document.createElement('div');
+  generalContainer.classList.add('general-container');
+  document.body.appendChild(generalContainer);
 
-const gameContainer = document.createElement('div');
-gameContainer.classList.add('game-container');
-generalContainer.appendChild(gameContainer);
+  const gameContainer = document.createElement('div');
+  gameContainer.classList.add('game-container');
+  generalContainer.appendChild(gameContainer);
 
-const tableContainer = document.createElement('div');
-tableContainer.classList.add('table-container');
-gameContainer.appendChild(tableContainer);
+  const tableContainer = document.createElement('div');
+  tableContainer.classList.add('table-container');
+  gameContainer.appendChild(tableContainer);
 
-const cardContainer = document.createElement('div');
-cardContainer.classList.add('card-container');
-gameContainer.appendChild(cardContainer);
+  const cardContainer = document.createElement('div');
+  cardContainer.classList.add('card-container');
+  gameContainer.appendChild(cardContainer);
 
-const infoContainer = document.createElement('div');
-infoContainer.classList.add('info-container');
-gameContainer.appendChild(infoContainer);
+  const infoContainer = document.createElement('div');
+  infoContainer.classList.add('info-container');
+  gameContainer.appendChild(infoContainer);
 
-const buttonContainer = document.createElement('div');
-buttonContainer.classList.add('button-container');
-gameContainer.appendChild(buttonContainer);
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('button-container');
+  gameContainer.appendChild(buttonContainer);
+};
 
-const buttonOne = document.createElement('button');
-buttonOne.classList.add('btn');
-buttonOne.innerText = 'BET ONE';
-buttonContainer.appendChild(buttonOne);
+renderContainers();
 
-const buttonMax = document.createElement('button');
-buttonMax.classList.add('btn');
-buttonMax.innerText = 'BET MAX';
-buttonContainer.appendChild(buttonMax);
+const renderButtons = () => {
+  const buttonLabels = ['BET ONE', 'BET MAX', 'DEAL'];
 
-const buttonDeal = document.createElement('button');
-buttonDeal.classList.add('btn');
-buttonDeal.innerText = 'DEAL';
-buttonDeal.disabled = true;
-buttonContainer.appendChild(buttonDeal);
+  for (let i = 0; i < 3; i += 1) {
+    const button = document.createElement('button');
+    button.classList.add('btn');
+    button.innerText = buttonLabels[i];
+    if (i === 2) {
+      button.disabled = true;
+    }
+    buttonContainer.appendChild(button);
+    buttonArray.push(button);
+  }
+};
+
+renderButtons();
 
 const renderTable = () => {
   tableContainer.innerHTML = '';
